@@ -1,0 +1,73 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Load Books Using jQuery</title>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 30px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: blue;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        li {
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Book List</h2>
+
+    <button id="loadBooks">Load Books</button>
+
+    <ul id="bookList"></ul>
+
+    <script>
+        $(document).ready(function () {
+
+            $("#loadBooks").click(function () {
+
+                $.ajax({
+                    url: "https://api.example.com/books",
+                    type: "GET",
+                    dataType: "json",
+
+                    success: function (books) {
+                        $("#bookList").empty();
+
+                        $.each(books, function (index, book) {
+                            $("#bookList").append(
+                                $("<li>").text(
+                                    book.title + " - " + book.author
+                                )
+                            );
+                        });
+                    },
+
+                    error: function () {
+                        $("#bookList").html(
+                            "<li>Unable to load books.</li>"
+                        );
+                    }
+                });
+
+            });
+
+        });
+    </script>
+
+</body>
+</html>

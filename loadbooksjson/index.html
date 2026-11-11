@@ -1,0 +1,58 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Load Books</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+<body>
+
+    <h2>Book List</h2>
+    <button id="loadBooks">Load Books</button>
+    <ul id="bookList"></ul>
+
+    <script>
+        $(document).ready(function () {
+            $("#loadBooks").click(function () {
+
+                $("#bookList").html("<li>Loading books...</li>");
+
+                $.ajax({
+                    url: "https://openlibrary.org/search.json",
+                    type: "GET",
+                    data: {
+                        q: "programming",
+                        fields: "title,author_name",
+                        limit: 10
+                    },
+                    dataType: "json",
+
+                    success: function (response) {
+                        $("#bookList").empty();
+
+                        $.each(response.docs, function (index, book) {
+                            const title = book.title || "Unknown Title";
+                            const author = book.author_name
+                                ? book.author_name.join(", ")
+                                : "Unknown Author";
+
+                            $("<li>")
+                                .text(title + " - " + author)
+                                .appendTo("#bookList");
+                        });
+                    },
+
+                    error: function () {
+                        $("#bookList").html(
+                            "<li>Unable to load books. Please try again.</li>"
+                        );
+                    }
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>

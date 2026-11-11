@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Department Website - Home</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Navigation Bar -->
+<nav class="navbar">
+    <div class="nav-container">
+        <div class="logo">🏢 Department Portal</div>
+        <ul class="nav-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="/about">About Us</a></li>
+            
+            <!-- When user is NOT logged in -->
+            <li id="authLinks" style="display: block;">
+                <a href="/login" class="btn-login">Login</a>
+                <a href="/register" class="btn-register">Register</a>
+            </li>
+            
+            <!-- When user IS logged in -->
+            <li id="userLinks" style="display: none;">
+                <span id="userName"></span>
+                <a href="#" onclick="logout(); return false;" class="btn-logout">Logout</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero">
+    <div class="hero-content">
+        <h1>Welcome to Department Portal</h1>
+        <p>Manage departments, explore opportunities, and connect with teams</p>
+        <a href="/dashboard" class="btn-primary" id="dashboardBtn" style="display: none;">Go to Dashboard</a>
+    </div>
+</section>
+
+<!-- Departments Section -->
+<section class="departments">
+    <div class="container">
+        <h2>Our Departments</h2>
+        <div id="departmentsList" class="departments-grid">
+            <!-- Departments will load here -->
+        </div>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section class="features">
+    <div class="container">
+        <h2>Why Choose Us?</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="icon">📊</div>
+                <h3>Professional</h3>
+                <p>Expert teams dedicated to excellence</p>
+            </div>
+            <div class="feature-card">
+                <div class="icon">🚀</div>
+                <h3>Innovative</h3>
+                <p>Latest technologies and solutions</p>
+            </div>
+            <div class="feature-card">
+                <div class="icon">🤝</div>
+                <h3>Collaborative</h3>
+                <p>Work together towards common goals</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="container">
+        <p>&copy; 2024 Department Portal. All rights reserved.</p>
+    </div>
+</footer>
+
+<script src="script.js"></script>
+<script>
+    // Load departments and check login status on page load
+    document.addEventListener('DOMContentLoaded', () => {
+        loadDepartments();
+        checkUserLogin();
+    });
+</script>
+
+</body>
+</html>
